@@ -12,6 +12,5 @@ public class UserManager {
 
     int id;
     String name;
-//    String pwd;
     String status;
 }

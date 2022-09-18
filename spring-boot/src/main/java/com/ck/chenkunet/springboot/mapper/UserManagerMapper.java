@@ -5,10 +5,14 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
-public interface UserManagerMapper {
+public interface UserManagerMapper extends BaseMapper<UserManager> {
 
     @Select("select * from lib_user_manager")
-    UserManager selectAll();
+    List<UserManager> selectAll();
+
+
 }
