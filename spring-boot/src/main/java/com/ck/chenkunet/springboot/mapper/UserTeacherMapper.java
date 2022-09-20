@@ -12,4 +12,7 @@ import java.util.List;
 public interface UserTeacherMapper extends BaseMapper<UserTeacher>{
     @Select("select * from lib_user_teacher")
     List<UserTeacher> selectAll();
+
+    @Select("select id from lib_user_teacher where phone=#{phone} and pwd=#{pwd}")
+    int login(UserTeacher entity);
 }

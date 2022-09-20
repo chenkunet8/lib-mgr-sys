@@ -12,6 +12,7 @@ public class UserTeacher {
     String post;
     String academy;
     String pwd;
+    String status;
 
     /**
      * 密码隐藏

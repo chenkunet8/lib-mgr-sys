@@ -9,7 +9,10 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface UserStudentMapper extends BaseMapper<UserStudent>{
+public interface UserStudentMapper extends BaseMapper<UserStudent> {
     @Select("select * from lib_user_student")
     List<UserStudent> selectAll();
+
+    @Select("select id from lib_user_student where phone=#{phone} and pwd=#{pwd}")
+    int login(UserStudent entity);
 }

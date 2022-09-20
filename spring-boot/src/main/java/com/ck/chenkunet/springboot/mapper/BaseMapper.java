@@ -8,7 +8,10 @@ public interface BaseMapper<T> {
 
     T selectOne(int id);
 
-    int insert(T entity);
-
     int delete(int id);
+
+    int login(T entity);
+
+    int register(T entity);
+
 }

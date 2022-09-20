@@ -17,4 +17,13 @@ public class BaseServiceImpl<M extends BaseMapper<T>, T> {
     public T selectOne(int id) {
         return mapper.selectOne(id);
     }
+
+    public int login(T entity) {
+        return mapper.login(entity);
+    }
+
+    public int register(T entity) {
+        return mapper.register(entity);
+    }
+
 }
