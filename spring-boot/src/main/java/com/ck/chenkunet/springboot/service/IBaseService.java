@@ -4,4 +4,5 @@ import java.util.List;
 
 public interface IBaseService<T> {
     List<T> selectAll();
+    T selectOne(int id);
 }

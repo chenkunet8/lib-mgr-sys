@@ -11,7 +11,6 @@ public class UserTeacher {
     String phone;
     String post;
     String academy;
-    String course;
     String pwd;
 
     /**
