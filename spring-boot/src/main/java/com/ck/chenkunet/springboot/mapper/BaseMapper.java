@@ -14,4 +14,6 @@ public interface BaseMapper<T> {
 
     int register(T entity);
 
+    int updateById(T entity);
+
 }

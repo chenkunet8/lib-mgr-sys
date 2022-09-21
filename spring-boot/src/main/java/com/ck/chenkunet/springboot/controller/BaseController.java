@@ -58,4 +58,15 @@ public class BaseController<S extends IBaseService<T>, T> {
             return Response.fail("", null, e.getMessage());
         }
     }
+
+    @ResponseBody
+    @PostMapping("/updateById")
+    public Response updateById(@RequestBody T entity) {
+        try {
+            int id = service.updateById(entity);
+            return Response.success(id);
+        } catch (Exception e) {
+            return Response.fail("", null, e.getMessage());
+        }
+    }
 }

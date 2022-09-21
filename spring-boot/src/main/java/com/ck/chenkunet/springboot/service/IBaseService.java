@@ -7,4 +7,5 @@ public interface IBaseService<T> {
     T selectOne(int id);
     int login(T entity);
     int register(T entity);
+    int updateById(T entity);
 }

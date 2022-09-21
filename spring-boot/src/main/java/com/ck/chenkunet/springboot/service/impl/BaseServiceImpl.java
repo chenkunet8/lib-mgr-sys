@@ -26,4 +26,7 @@ public class BaseServiceImpl<M extends BaseMapper<T>, T> {
         return mapper.register(entity);
     }
 
+    public int updateById(T entity) {
+        return mapper.updateById(entity);
+    }
 }
