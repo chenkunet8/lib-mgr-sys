@@ -3,7 +3,7 @@ import store from "@/store/index";
 import router from "@/router";
 import { message } from "ant-design-vue";
 
-axios.defaults.baseURL = "http://127.0.0.1:8088"
+// axios.defaults.baseURL = "http://127.0.0.1:8088"
 axios.defaults.timeout = 15000;
 axios.defaults.withCredentials = true;
 axios.defaults.headers.post["Content-Type"] =

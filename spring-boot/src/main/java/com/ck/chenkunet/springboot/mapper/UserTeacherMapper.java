@@ -1,6 +1,8 @@
 package com.ck.chenkunet.springboot.mapper;
 
+import com.ck.chenkunet.springboot.entity.UserManager;
 import com.ck.chenkunet.springboot.entity.UserTeacher;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -24,5 +26,8 @@ public interface UserTeacherMapper extends BaseMapper<UserTeacher> {
      */
     @Update("update lib_user_teacher set status=#{status} where id=#{id}")
     int updateById(UserTeacher entity);
+
+    @Insert("insert into lib_user_teacher (name,pwd,phone,post,academy) values (#{name},#{pwd},#{phone},#{post},#{academy})")
+    int register(UserManager entity);
 
 }

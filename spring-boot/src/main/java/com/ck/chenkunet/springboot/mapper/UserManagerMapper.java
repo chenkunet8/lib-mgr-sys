@@ -15,7 +15,7 @@ public interface UserManagerMapper extends BaseMapper<UserManager> {
     @Select("select * from lib_user_manager")
     List<UserManager> selectAll();
 
-    @Select("select id from lib_user_manager where name=#{name} and pwd=#{pwd}")
+    @Select("select id from lib_user_manager where phone=#{phone} and pwd=#{pwd}")
     int login(UserManager entity);
 
     @Insert("insert into lib_user_manager (name,pwd,status) values (#{name},#{pwd},#{status})")

@@ -14,6 +14,7 @@ public class UserManager {
     String pwd;
     String name;
     String status;
+    String phone;
 
     /**
      * 密码隐藏

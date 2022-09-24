@@ -1,39 +1,38 @@
 <template>
   <div class="login_page fillcontain">
     <transition name="form-fade" mode="in-out">
-      <section class="form_contianer" v-show="showLogin">
+      <section class="form_register">
         <div class="manage_tip">
-          <p>实验室管理系统</p>
+          <p>教师注册</p>
         </div>
-        <el-form :model="loginForm" :rules="rules" ref="loginForm">
-          <el-form-item prop="username">
-            <el-input v-model="loginForm.phone" placeholder="账号"
-              ><span>dsfsf</span></el-input
-            >
+        <el-form :model="registerForm" :rules="rules" ref="registerForm">
+          <el-form-item prop="name">
+            <el-input v-model="registerForm.name" placeholder="姓名"></el-input>
           </el-form-item>
-          <el-form-item prop="password">
+          <el-form-item prop="phone">
+            <el-input
+              v-model="registerForm.phone"
+              placeholder="账号"
+            ></el-input>
+          </el-form-item>
+          <el-form-item prop="post">
+            <el-input v-model="registerForm.post" placeholder="级别"></el-input>
+          </el-form-item>
+          <el-form-item prop="academy">
+            <el-input
+              v-model="registerForm.academy"
+              placeholder="学院"
+            ></el-input>
+          </el-form-item>
+          <el-form-item prop="pwd">
             <el-input
               type="password"
               placeholder="密码"
-              v-model="loginForm.pwd"
+              v-model="registerForm.pwd"
             ></el-input>
           </el-form-item>
           <el-form-item>
-            <el-radio-group v-model="radio">
-              <el-radio :label="1">学生</el-radio>
-              <el-radio :label="2">教师</el-radio>
-              <el-radio :label="3">管理员</el-radio>
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="login" class="submit_btn"
-              >登录</el-button
-            >
-            <el-button
-              type="primary"
-              @click="register"
-              class="submit_btn"
-              v-if="radio != 3"
+            <el-button type="primary" @click="register" class="submit_btn"
               >注册</el-button
             >
           </el-form-item>
@@ -44,54 +43,49 @@
 </template>
 
 <script>
-import { login } from "@/api/api.js";
+import { register } from "@/api/api.js";
 
 export default {
   data() {
     return {
-      loginForm: {
+      registerForm: {
+        name: "",
         phone: "",
+        post: "",
+        academy: "",
         pwd: ""
       },
       rules: {
+        name: [{ required: true, message: "请输入用户名", trigger: "blur" }],
         phone: [{ required: true, message: "请输入账号", trigger: "blur" }],
+        post: [{ required: true, message: "请输入级别", trigger: "blur" }],
+        academy: [
+          { required: true, message: "请输入学院信息", trigger: "blur" }
+        ],
         pwd: [{ required: true, message: "请输入密码", trigger: "blur" }]
-      },
-      showLogin: true,
-      radio: 1
+      }
     };
   },
   mounted() {},
   methods: {
-    login() {
-      login(this.loginForm, this.radio).then(response => {
+    register() {
+      register(this.registerForm, 2).then(response => {
         if (response.status == "200") {
-          //登录成功
-          this.$store.dispatch("setUser", this.loginForm);
+          //注册成功
           this.$message({
             showClose: true,
-            message: "登录成功",
+            message: "您的注册信息已提交管理员审核",
             type: "success"
           });
-          this.$router.push("/manage");
+          this.$router.push("/");
         } else {
           this.$message({
             showClose: true,
-            message: "账号或密码错误",
+            message: "注册失败" + response.message,
             type: "error"
           });
         }
       });
-    },
-    register() {
-      switch (this.radio) {
-        case 1:
-          this.$router.push("/register");
-          break;
-        case 2:
-          this.$router.push("/registerTeacher");
-          break;
-      }
     }
   },
   watch: {}
@@ -113,9 +107,9 @@ export default {
     color: #fff;
   }
 }
-.form_contianer {
-  .wh(320px, 210px);
-  .ctp(320px, 210px);
+.form_register {
+  .wh(320px, 350px);
+  .ctp(320px, 350px);
   padding: 25px;
   border-radius: 5px;
   text-align: center;
