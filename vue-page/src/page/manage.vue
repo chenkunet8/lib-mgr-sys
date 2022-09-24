@@ -25,8 +25,8 @@
             <template slot="title"
               ><i class="el-icon-plus"></i>设备管理</template
             >
-            <el-menu-item index="addShop">设备清单</el-menu-item>
-            <el-menu-item index="addGoods">设备归还</el-menu-item>
+            <el-menu-item index="deviceList">设备清单</el-menu-item>
+            <el-menu-item index="deviceManager">设备明细</el-menu-item>
           </el-submenu>
           <el-submenu index="4">
             <template slot="title"

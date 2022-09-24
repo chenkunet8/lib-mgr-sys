@@ -3,6 +3,16 @@ import { doPostRequest, doGetRequest } from "../axios/axiosApi.js";
 export function selectAllStudent() {
   return doGetRequest("/api/user-student/selectAll");
 }
+export function selectAllTeacher() {
+  return doGetRequest("/api/user-teacher/selectAll");
+}
+export function selectAllManager() {
+  return doGetRequest("/api/user-manager/selectAll");
+}
+export function selectAllDeviceInfo() {
+  return doGetRequest("/api/device/selectAllDeviceInfo");
+}
+
 
 export function login(parame, type) {
   switch (type) {
