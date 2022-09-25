@@ -32,8 +32,15 @@
             <template slot="title"
               ><i class="el-icon-star-on"></i>实验室管理</template
             >
-            <el-menu-item index="visitor">实验室清单</el-menu-item>
-            <el-menu-item index="vueEdit">实验室借用</el-menu-item>
+            <el-menu-item index="libInfo">实验室清单</el-menu-item>
+            <el-menu-item index="libManager">实验室借用</el-menu-item>
+          </el-submenu>
+          <el-submenu index="5">
+            <template slot="title"
+              ><i class="el-icon-setting"></i>管理员菜单</template
+            >
+            <el-menu-item index="userAudit">教师审核</el-menu-item>
+            <el-menu-item index="deviceAudit">设备操作</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-col>

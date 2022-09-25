@@ -9,35 +9,45 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55"> </el-table-column>
-      <el-table-column prop="id" label="id" width="120"> </el-table-column>
-      <el-table-column prop="name" label="姓名" width="120"> </el-table-column>
-      <el-table-column prop="phone" label="账号" width="120"></el-table-column>
-      <el-table-column prop="post" label="级别" width="120"> </el-table-column>
+      <el-table-column prop="id" label="id" width="50"> </el-table-column>
+      <el-table-column prop="name" label="设备名称" width="120">
+      </el-table-column>
       <el-table-column
-        prop="academy"
-        label="学院"
+        prop="type"
+        label="设备类型"
         width="120"
+      ></el-table-column>
+      <el-table-column prop="owner" label="设备所有者" width="120">
+      </el-table-column>
+      <el-table-column
+        prop="time"
+        label="入库时间"
+        width="220"
       ></el-table-column>
       <el-table-column label="状态" width="120">
         <template slot-scope="scope">
           <el-button
-            v-if="scope.row.status == 1"
+            v-if="scope.row.status == 0"
             type="success"
             plain
             size="small"
-            >正常</el-button
+            >在库</el-button
           >
-          <el-button  v-if="scope.row.status == 0" type="warning" plain size="small">待审核</el-button>
-          <el-button  v-if="scope.row.status == 2" type="danger" plain size="small">已失效</el-button>
+          <el-button v-if="scope.row.status == 1" type="warning" plain size="small">已出借</el-button>
         </template>
       </el-table-column>
+      <el-table-column
+        prop="model"
+        label="设备型号"
+        width="120"
+      ></el-table-column>
     </el-table>
   </div>
 </template>
 
 <script>
 import headTop from "../components/headTop";
-import { selectAllTeacher } from "@/api/api.js";
+import { selectAllDeviceInfo } from "@/api/api.js";
 
 export default {
   data() {
@@ -55,7 +65,7 @@ export default {
   methods: {
     handleSelectionChange() {},
     getTableData() {
-      selectAllTeacher().then(response => {
+      selectAllDeviceInfo().then(response => {
         if (response.status == "200") {
           //获取成功
           this.tableData = response.data;

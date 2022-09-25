@@ -68,6 +68,7 @@ export default {
         if (response.status == "200") {
           //登录成功
           this.$store.dispatch("setUser", this.loginForm);
+          this.$store.dispatch("setRole", this.radio);
           this.$message({
             showClose: true,
             message: "登录成功",

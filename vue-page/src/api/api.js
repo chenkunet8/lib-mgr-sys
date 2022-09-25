@@ -15,7 +15,13 @@ export function selectAllDeviceInfo() {
 export function selectAllDeviceMessageInfo() {
   return doGetRequest("/api/device-message/selectAllDeviceMessageInfo");
 }
+export function selectAllRoom() {
+  return doGetRequest("/api/room/selectAll");
+}
 
+export function updateTeacherById(parame) {
+  return doPostRequest("/api/user-teacher/updateById", parame);
+}
 
 export function login(parame, type) {
   switch (type) {

@@ -20,4 +20,6 @@ public interface UserStudentMapper extends BaseMapper<UserStudent> {
 
     @Insert("insert into lib_user_student (name,pwd,phone,sid,academy) values (#{name},#{pwd},#{phone},#{sid},#{academy})")
     int register(UserManager entity);
+
+
 }

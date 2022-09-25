@@ -10,6 +10,10 @@ import teacherList from "@/page/teacherList.vue";
 import managerList from "@/page/managerList.vue";
 import deviceList from "@/page/deviceList.vue";
 import deviceManager from "@/page/deviceManager.vue";
+import libInfo from "@/page/libInfo.vue";
+import libManager from "@/page/libManager.vue";
+import userAudit from "@/page/userAudit.vue";
+import deviceAudit from "@/page/deviceAudit.vue";
 
 Vue.use(Router);
 
@@ -59,12 +63,31 @@ export default new Router({
           path: "/deviceList",
           component: deviceList,
           meta: ["设备管理", "设备清单"]
-        }
-        ,
+        },
         {
           path: "/deviceManager",
           component: deviceManager,
           meta: ["设备管理", "设备明细"]
+        },
+        {
+          path: "/libInfo",
+          component: libInfo,
+          meta: ["实验室管理", "实验室清单"]
+        },
+        {
+          path: "/libManager",
+          component: libManager,
+          meta: ["实验室管理", "实验室借用"]
+        },
+        {
+          path: "/userAudit",
+          component: userAudit,
+          meta: ["管理员菜单", "教师审核"]
+        },
+        {
+          path: "/deviceAudit",
+          component: deviceAudit,
+          meta: ["管理员菜单", "设备审核"]
         }
       ]
     }
