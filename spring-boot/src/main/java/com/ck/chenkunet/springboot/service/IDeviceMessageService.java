@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface IDeviceMessageService extends IBaseService<DeviceMessage>{
     List<DeviceMessageInfo> selectAllDeviceMessageInfo();
+
+    DeviceMessage selectOneByDeviceId(int deviceId);
 }

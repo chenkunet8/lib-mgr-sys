@@ -48,17 +48,17 @@ export default new Router({
         {
           path: "/studuentList",
           component: studuentList,
-          meta: ["用户管理", "学生列表"]
+          meta: ["用户信息", "学生列表"]
         },
         {
           path: "/teacherList",
           component: teacherList,
-          meta: ["用户管理", "教师列表"]
+          meta: ["用户信息", "教师列表"]
         },
         {
           path: "/managerList",
           component: managerList,
-          meta: ["用户管理", "管理员列表"]
+          meta: ["用户信息", "管理员列表"]
         },
         {
           path: "/deviceList",

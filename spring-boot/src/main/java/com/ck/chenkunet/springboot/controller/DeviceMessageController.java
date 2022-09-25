@@ -30,4 +30,16 @@ public class DeviceMessageController extends BaseController<IDeviceMessageServic
             return Response.fail("", null, e.getMessage());
         }
     }
+
+    @ResponseBody
+    @GetMapping("/selectOneByDeviceId")
+    public Response<DeviceMessage> selectOneByDeviceId(int deviceId) {
+        try {
+            DeviceMessage list = service.selectOneByDeviceId(deviceId);
+            System.out.println(list);
+            return Response.success(list);
+        } catch (Exception e) {
+            return Response.fail("", null, e.getMessage());
+        }
+    }
 }

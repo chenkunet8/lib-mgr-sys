@@ -67,6 +67,7 @@ export default {
       login(this.loginForm, this.radio).then(response => {
         if (response.status == "200") {
           //登录成功
+          this.loginForm.id = response.data;
           this.$store.dispatch("setUser", this.loginForm);
           this.$store.dispatch("setRole", this.radio);
           this.$message({

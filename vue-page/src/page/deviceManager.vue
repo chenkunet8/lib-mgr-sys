@@ -42,6 +42,13 @@
             size="small"
             >其他</el-button
           >
+          <el-button
+            v-if="scope.row.type == 9"
+            type="info"
+            plain
+            size="small"
+            >审核中</el-button
+          >
         </template></el-table-column
       >
       <el-table-column prop="time" label="操作时间" width="220">

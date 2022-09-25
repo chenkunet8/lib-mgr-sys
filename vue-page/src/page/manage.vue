@@ -15,7 +15,7 @@
           >
           <el-submenu index="2">
             <template slot="title"
-              ><i class="el-icon-document"></i>用户管理</template
+              ><i class="el-icon-document"></i>用户信息</template
             >
             <el-menu-item index="studuentList">学生列表</el-menu-item>
             <el-menu-item index="teacherList">教师列表</el-menu-item>
@@ -28,7 +28,7 @@
             <el-menu-item index="deviceList">设备清单</el-menu-item>
             <el-menu-item index="deviceManager">设备明细</el-menu-item>
           </el-submenu>
-          <el-submenu index="4">
+          <el-submenu index="4" v-if="role == 3">
             <template slot="title"
               ><i class="el-icon-star-on"></i>实验室管理</template
             >
@@ -39,7 +39,7 @@
             <template slot="title"
               ><i class="el-icon-setting"></i>操作菜单</template
             >
-            <el-menu-item index="userAudit">教师审核</el-menu-item>
+            <el-menu-item index="userAudit" v-if="role == 3">教师审核</el-menu-item>
             <el-menu-item index="deviceAudit">设备操作</el-menu-item>
           </el-submenu>
         </el-menu>
@@ -55,6 +55,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      role: this.$store.getters.role
+    };
+  },
   computed: {
     defaultActive: function() {
       return this.$route.path.replace("/", "");

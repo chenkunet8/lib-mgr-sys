@@ -6,9 +6,7 @@ import com.ck.chenkunet.springboot.pojo.Response;
 import com.ck.chenkunet.springboot.service.IDeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,4 +27,16 @@ public class DeviceController extends BaseController<IDeviceService, Device> {
             return Response.fail("", null, e.getMessage());
         }
     }
+
+    @ResponseBody
+    @PostMapping("/register")
+    public Response register(@RequestBody Device entity) {
+        try {
+            service.register(entity);
+            return Response.success(entity.getId());
+        } catch (Exception e) {
+            return Response.fail("", null, e.getMessage());
+        }
+    }
+
 }

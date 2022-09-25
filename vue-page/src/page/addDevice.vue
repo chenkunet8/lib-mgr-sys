@@ -48,7 +48,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="addDevice" class="submit_btn"
-          >注册</el-button
+          >添加</el-button
         >
       </el-form-item>
     </el-form>
@@ -57,11 +57,12 @@
 
 <script>
 import headTop from "../components/headTop";
-import { addDevice } from "@/api/api.js";
+import { addDevice, addDeviceMessage } from "@/api/api.js";
 
 export default {
   data() {
     return {
+      user: this.$store.getters.user,
       registerForm: {
         name: "",
         model: "",
@@ -100,6 +101,7 @@ export default {
             message: "添加成功",
             type: "success"
           });
+          this.addDeviceMessage(response.data, this.user.id, "入库成功");
           this.$router.push("/deviceAudit");
         } else {
           this.$message({
@@ -110,14 +112,40 @@ export default {
         }
       });
     },
+    addDeviceMessage(deviceId, managerId, comment) {
+      let param = {
+        deviceId: deviceId,
+        type: 0,
+        time: this.formatDate(),
+        managerId: managerId,
+        userId: 0,
+        comment: comment
+      };
+      addDeviceMessage(param);
+    },
     formatDate() {
       var now = new Date();
       var year = now.getFullYear();
       var month = now.getMonth() + 1;
+      if (month.toString().length < 2) {
+        month = "0" + month;
+      }
       var date = now.getDate();
+      if (date.toString().length < 2) {
+        date = "0" + date;
+      }
       var hour = now.getHours();
+      if (hour.toString().length < 2) {
+        hour = "0" + hour;
+      }
       var minute = now.getMinutes();
+      if (minute.toString().length < 2) {
+        minute = "0" + minute;
+      }
       var second = now.getSeconds();
+      if (second.toString().length < 2) {
+        second = "0" + second;
+      }
       return (
         year +
         "-" +

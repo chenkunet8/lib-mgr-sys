@@ -18,4 +18,8 @@ public class DeviceMessageServiceImpl extends BaseServiceImpl<DeviceMessageMappe
     public List<DeviceMessageInfo> selectAllDeviceMessageInfo(){
         return mapper.selectAllDeviceMessageInfo();
     }
+
+    public DeviceMessage selectOneByDeviceId(int deviceId){
+        return mapper.selectOneByDeviceId(deviceId);
+    }
 }

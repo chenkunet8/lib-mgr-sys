@@ -10,7 +10,7 @@ public class DeviceMessage {
     int deviceId;
     String type;
     String time;
-    String managerId;
-    String userId;
+    int managerId;
+    int userId;
     String comment;
 }

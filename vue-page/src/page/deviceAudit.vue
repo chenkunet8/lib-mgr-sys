@@ -1,7 +1,12 @@
 <template>
   <div>
     <head-top></head-top>
-    <el-button type="primary" class="submit_btn" style="margin: 10px;" @click="showAddPage"
+    <el-button
+      v-if="role == 3"
+      type="primary"
+      class="submit_btn"
+      style="margin: 10px;"
+      @click="showAddPage"
       >+ 设备录入</el-button
     >
     <el-table
@@ -80,7 +85,7 @@
           <el-popconfirm
             title="是否确认归还？"
             @confirm="auditConfirm(scope.row, 1)"
-            v-if="scope.row.status == 1"
+            v-if="scope.row.status == 1 && role == 1"
           >
             <el-button type="success" plain size="small" slot="reference"
               >归还</el-button
@@ -98,7 +103,7 @@
           <el-popconfirm
             title="是否确认废弃？"
             @confirm="auditConfirm(scope.row, 3)"
-            v-if="scope.row.status == 2"
+            v-if="scope.row.status == 0 && role == 3"
           >
             <el-button type="danger" plain size="small" slot="reference"
               >废弃</el-button
@@ -107,7 +112,7 @@
           <el-popconfirm
             title="是否确认审核通过？"
             @confirm="auditConfirm(scope.row, 4)"
-            v-if="scope.row.status == 9"
+            v-if="scope.row.status == 9 && role == 3"
           >
             <el-button type="success" plain size="small" slot="reference"
               >审核通过</el-button
@@ -115,8 +120,8 @@
           </el-popconfirm>
           <el-popconfirm
             title="是否驳回申请？"
-            @confirm="auditConfirm(scope.row, 1)"
-            v-if="scope.row.status == 9"
+            @confirm="auditConfirm(scope.row, 5)"
+            v-if="scope.row.status == 9 && role == 3"
           >
             <el-button type="danger" plain size="small" slot="reference"
               >审核不通过</el-button
@@ -130,7 +135,12 @@
 
 <script>
 import headTop from "../components/headTop";
-import { selectAllDeviceInfo, updateDeviceById } from "@/api/api.js";
+import {
+  selectAllDeviceInfo,
+  updateDeviceById,
+  addDeviceMessage,
+  selectOneByDeviceId
+} from "@/api/api.js";
 
 export default {
   data() {
@@ -178,21 +188,31 @@ export default {
         case 1:
           param.status = "0";
           this.updateDeviceById(param);
+          this.selectOneByDeviceId(row.id, 2, "设备已归还", this.user.id);
           break;
         // 设备借出
         case 2:
           param.status = "9";
           this.updateDeviceById(param);
+          this.selectOneByDeviceId(row.id, 9, "设备借出审核", this.user.id);
           break;
         // 设备废弃
         case 3:
           param.status = "2";
           this.updateDeviceById(param);
+          this.selectOneByDeviceId(row.id, 3, "设备已废弃", "");
           break;
         // 借用通过
         case 4:
           param.status = "1";
           this.updateDeviceById(param);
+          this.selectOneByDeviceId(row.id, 1, "设备已出库", "");
+          break;
+        // 驳回申请
+        case 5:
+          param.status = "0";
+          this.updateDeviceById(param);
+          this.selectOneByDeviceId(row.id, 2, "设备已回收", "");
           break;
       }
       this.getTableData();
@@ -215,8 +235,75 @@ export default {
         }
       });
     },
-    showAddPage(){
+    showAddPage() {
       this.$router.push("/addDevice");
+    },
+    addDeviceMessage(param) {
+      addDeviceMessage(param).then(response => {
+        if (response.status == "200") {
+        } else {
+          this.$message({
+            showClose: true,
+            message: "系统异常！",
+            type: "error"
+          });
+        }
+      });
+    },
+    selectOneByDeviceId(deviceId, type, comment, userId) {
+      selectOneByDeviceId(deviceId).then(response => {
+        if (response.status == "200") {
+          let param = response.data;
+          param.type = type;
+          param.comment = comment;
+          userId ? (param.userId = userId) : "";
+          param.time = this.formatDate();
+          this.addDeviceMessage(param);
+        } else {
+          this.$message({
+            showClose: true,
+            message: "系统异常！",
+            type: "error"
+          });
+        }
+      });
+    },
+    formatDate() {
+      var now = new Date();
+      var year = now.getFullYear();
+      var month = now.getMonth() + 1;
+      if (month.toString().length < 2) {
+        month = "0" + month;
+      }
+      var date = now.getDate();
+      if (date.toString().length < 2) {
+        date = "0" + date;
+      }
+      var hour = now.getHours();
+      if (hour.toString().length < 2) {
+        hour = "0" + hour;
+      }
+      var minute = now.getMinutes();
+      if (minute.toString().length < 2) {
+        minute = "0" + minute;
+      }
+      var second = now.getSeconds();
+      if (second.toString().length < 2) {
+        second = "0" + second;
+      }
+      return (
+        year +
+        "-" +
+        month +
+        "-" +
+        date +
+        " " +
+        hour +
+        ":" +
+        minute +
+        ":" +
+        second
+      );
     }
   }
 };

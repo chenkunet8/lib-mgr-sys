@@ -31,6 +31,16 @@ export function addDevice(parame) {
   return doPostRequest("/api/device/register", parame);
 }
 
+export function addDeviceMessage(parame) {
+  return doPostRequest("/api/device-message/register", parame);
+}
+
+export function selectOneByDeviceId(deviceId) {
+  return doGetRequest(
+    "/api/device-message/selectOneByDeviceId?deviceId=" + deviceId
+  );
+}
+
 export function login(parame, type) {
   switch (type) {
     case 1:

@@ -43,7 +43,7 @@
             size="small"
             >在库</el-button
           >
-          <el-button v-if="scope.row.status == 1" type="warning" plain size="small">已出借</el-button>
+          <el-button v-else type="warning" plain size="small">其他</el-button>
         </template>
       </el-table-column>
       <el-table-column
