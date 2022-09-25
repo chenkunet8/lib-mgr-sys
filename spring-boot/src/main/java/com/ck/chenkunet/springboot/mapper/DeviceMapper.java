@@ -19,10 +19,10 @@ public interface DeviceMapper extends BaseMapper<Device> {
 
     @Select({"<script>"
             + " SELECT a.id,a.owner,a.user,a.status,a.time,a.name ,a.model,b.name as type,c.phone ,c.name as s_name "
-            + " FROM libmanager.lib_device a  "
-            + " left join libmanager.lib_user_student c  "
+            + " FROM lib_device a  "
+            + " left join lib_user_student c  "
             + " on a.user =c.id "
-            + " left join libmanager.lib_device_type b "
+            + " left join lib_device_type b "
             + " on a.type = b.id "
             + "</script>"})
     List<DeviceInfo> selectAllDeviceInfo();

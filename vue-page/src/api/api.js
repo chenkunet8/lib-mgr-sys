@@ -12,6 +12,9 @@ export function selectAllManager() {
 export function selectAllDeviceInfo() {
   return doGetRequest("/api/device/selectAllDeviceInfo");
 }
+export function selectAllDeviceMessageInfo() {
+  return doGetRequest("/api/device-message/selectAllDeviceMessageInfo");
+}
 
 
 export function login(parame, type) {

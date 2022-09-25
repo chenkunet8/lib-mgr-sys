@@ -9,6 +9,7 @@ import studuentList from "@/page/studuentList.vue";
 import teacherList from "@/page/teacherList.vue";
 import managerList from "@/page/managerList.vue";
 import deviceList from "@/page/deviceList.vue";
+import deviceManager from "@/page/deviceManager.vue";
 
 Vue.use(Router);
 
@@ -58,6 +59,12 @@ export default new Router({
           path: "/deviceList",
           component: deviceList,
           meta: ["设备管理", "设备清单"]
+        }
+        ,
+        {
+          path: "/deviceManager",
+          component: deviceManager,
+          meta: ["设备管理", "设备明细"]
         }
       ]
     }
