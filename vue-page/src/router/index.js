@@ -14,6 +14,7 @@ import libInfo from "@/page/libInfo.vue";
 import libManager from "@/page/libManager.vue";
 import userAudit from "@/page/userAudit.vue";
 import deviceAudit from "@/page/deviceAudit.vue";
+import addDevice from "@/page/addDevice.vue";
 
 Vue.use(Router);
 
@@ -87,7 +88,12 @@ export default new Router({
         {
           path: "/deviceAudit",
           component: deviceAudit,
-          meta: ["管理员菜单", "设备操作"]
+          meta: ["操作菜单", "设备操作"]
+        },
+        {
+          path: "/addDevice",
+          component: addDevice,
+          meta: ["操作菜单", "设备操作", "新增设备"]
         }
       ]
     }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <head-top></head-top>
-    <el-button type="primary" class="submit_btn" style="margin: 10px;"
+    <el-button type="primary" class="submit_btn" style="margin: 10px;" @click="showAddPage"
       >+ 设备录入</el-button
     >
     <el-table
@@ -21,12 +21,23 @@
         width="120"
       ></el-table-column>
       <el-table-column prop="owner" label="设备所有者" width="120">
+        <template slot-scope="scope">
+          <el-button
+            v-if="scope.row.owner == 1"
+            type="success"
+            plain
+            size="small"
+            >学院</el-button
+          >
+          <el-button
+            v-if="scope.row.owner == 2"
+            type="warning"
+            plain
+            size="small"
+            >学校</el-button
+          >
+        </template>
       </el-table-column>
-      <el-table-column
-        prop="time"
-        label="入库时间"
-        width="220"
-      ></el-table-column>
       <el-table-column label="状态" width="120">
         <template slot-scope="scope">
           <el-button
@@ -43,6 +54,20 @@
             size="small"
             >已出借</el-button
           >
+          <el-button
+            v-if="scope.row.status == 2"
+            type="warning"
+            plain
+            size="small"
+            >废弃</el-button
+          >
+          <el-button
+            v-if="scope.row.status == 9"
+            type="warning"
+            plain
+            size="small"
+            >待审批</el-button
+          >
         </template>
       </el-table-column>
       <el-table-column
@@ -50,45 +75,51 @@
         label="设备型号"
         width="120"
       ></el-table-column>
-      <el-table-column label="操作" width="120">
+      <el-table-column label="操作" width="220">
         <template slot-scope="scope">
           <el-popconfirm
             title="是否确认归还？"
-            @confirm="auditConfirm(scope.row)"
+            @confirm="auditConfirm(scope.row, 1)"
             v-if="scope.row.status == 1"
           >
-            <el-button
-              type="success"
-              plain
-              size="small"
-              slot="reference"
+            <el-button type="success" plain size="small" slot="reference"
               >归还</el-button
             >
           </el-popconfirm>
           <el-popconfirm
             title="是否确认借出？"
-            @confirm="auditConfirm(scope.row)"
-            v-if="scope.row.status == 0"
+            @confirm="auditConfirm(scope.row, 2)"
+            v-if="scope.row.status == 0 && role == 1"
           >
-            <el-button
-              type="warning"
-              plain
-              size="small"
-              slot="reference"
+            <el-button type="warning" plain size="small" slot="reference"
               >借出</el-button
             >
           </el-popconfirm>
           <el-popconfirm
             title="是否确认废弃？"
-            @confirm="auditConfirm(scope.row)"
+            @confirm="auditConfirm(scope.row, 3)"
             v-if="scope.row.status == 2"
           >
-            <el-button
-              type="danger"
-              plain
-              size="small"
-              slot="reference"
+            <el-button type="danger" plain size="small" slot="reference"
               >废弃</el-button
+            >
+          </el-popconfirm>
+          <el-popconfirm
+            title="是否确认审核通过？"
+            @confirm="auditConfirm(scope.row, 4)"
+            v-if="scope.row.status == 9"
+          >
+            <el-button type="success" plain size="small" slot="reference"
+              >审核通过</el-button
+            >
+          </el-popconfirm>
+          <el-popconfirm
+            title="是否驳回申请？"
+            @confirm="auditConfirm(scope.row, 1)"
+            v-if="scope.row.status == 9"
+          >
+            <el-button type="danger" plain size="small" slot="reference"
+              >审核不通过</el-button
             >
           </el-popconfirm>
         </template>
@@ -99,12 +130,14 @@
 
 <script>
 import headTop from "../components/headTop";
-import { selectAllDeviceInfo } from "@/api/api.js";
+import { selectAllDeviceInfo, updateDeviceById } from "@/api/api.js";
 
 export default {
   data() {
     return {
-      tableData: []
+      tableData: [],
+      role: this.$store.getters.role,
+      user: this.$store.getters.user
     };
   },
   components: {
@@ -135,8 +168,55 @@ export default {
         }
       });
     },
-    auditConfirm(){
-      
+    auditConfirm(row, type) {
+      let param = {
+        id: row.id,
+        status: "0"
+      };
+      switch (type) {
+        // 设备归还
+        case 1:
+          param.status = "0";
+          this.updateDeviceById(param);
+          break;
+        // 设备借出
+        case 2:
+          param.status = "9";
+          this.updateDeviceById(param);
+          break;
+        // 设备废弃
+        case 3:
+          param.status = "2";
+          this.updateDeviceById(param);
+          break;
+        // 借用通过
+        case 4:
+          param.status = "1";
+          this.updateDeviceById(param);
+          break;
+      }
+      this.getTableData();
+    },
+    updateDeviceById(param) {
+      updateDeviceById(param).then(response => {
+        if (response.status == "200") {
+          this.$message({
+            showClose: true,
+            message: "操作成功",
+            type: "success"
+          });
+          this.getTableData();
+        } else {
+          this.$message({
+            showClose: true,
+            message: "系统异常！",
+            type: "error"
+          });
+        }
+      });
+    },
+    showAddPage(){
+      this.$router.push("/addDevice");
     }
   }
 };

@@ -9,8 +9,12 @@
     <el-dropdown @command="handleCommand" menu-align="start">
       <img src="../../images/head.png" class="avator" />
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item command="home">首页</el-dropdown-item>
-        <el-dropdown-item command="signout">退出</el-dropdown-item>
+        <el-dropdown-item @click="homePage" command="homePage"
+          >首页</el-dropdown-item
+        >
+        <el-dropdown-item @click="logout" command="logout"
+          >退出</el-dropdown-item
+        >
       </el-dropdown-menu>
     </el-dropdown>
   </div>
@@ -24,9 +28,17 @@ export default {
   created() {},
   computed: {},
   methods: {
-	handleCommand(){
-		
-	}
+    handleCommand(command) {
+      command == "homePage" ? this.homePage() : "";
+      command == "logout" ? this.logout() : "";
+    },
+    homePage() {
+      this.$router.push("/manage");
+    },
+    logout() {
+      this.$store.dispatch("logout");
+      this.$router.push("/");
+    }
   }
 };
 </script>

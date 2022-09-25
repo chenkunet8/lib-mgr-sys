@@ -23,6 +23,14 @@ export function updateTeacherById(parame) {
   return doPostRequest("/api/user-teacher/updateById", parame);
 }
 
+export function updateDeviceById(parame) {
+  return doPostRequest("/api/device/updateById", parame);
+}
+
+export function addDevice(parame) {
+  return doPostRequest("/api/device/register", parame);
+}
+
 export function login(parame, type) {
   switch (type) {
     case 1:

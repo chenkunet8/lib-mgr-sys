@@ -2,8 +2,12 @@ package com.ck.chenkunet.springboot.mapper;
 
 import com.ck.chenkunet.springboot.entity.Device;
 import com.ck.chenkunet.springboot.entity.DeviceInfo;
+import com.ck.chenkunet.springboot.entity.UserManager;
+import com.ck.chenkunet.springboot.entity.UserTeacher;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,4 +30,10 @@ public interface DeviceMapper extends BaseMapper<Device> {
             + " on a.type = b.id "
             + "</script>"})
     List<DeviceInfo> selectAllDeviceInfo();
+
+    @Update("update lib_device set status=#{status} where id=#{id}")
+    int updateById(Device entity);
+
+    @Insert("insert into lib_device (type,owner,user,time,status,name,model) values (#{type},#{owner},#{user},#{time},#{status},#{name},#{model})")
+    int register(Device entity);
 }

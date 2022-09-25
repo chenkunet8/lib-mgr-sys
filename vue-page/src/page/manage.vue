@@ -37,7 +37,7 @@
           </el-submenu>
           <el-submenu index="5">
             <template slot="title"
-              ><i class="el-icon-setting"></i>管理员菜单</template
+              ><i class="el-icon-setting"></i>操作菜单</template
             >
             <el-menu-item index="userAudit">教师审核</el-menu-item>
             <el-menu-item index="deviceAudit">设备操作</el-menu-item>

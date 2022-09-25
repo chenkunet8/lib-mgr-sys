@@ -18,6 +18,16 @@
         width="120"
       ></el-table-column>
       <el-table-column prop="owner" label="设备所有者" width="120">
+        <template slot-scope="scope">
+          <el-button
+            v-if="scope.row.owner == 1"
+            type="success"
+            plain
+            size="small"
+            >学院</el-button
+          >
+          <el-button v-if="scope.row.owner == 2" type="warning" plain size="small">学校</el-button>
+        </template>
       </el-table-column>
       <el-table-column
         prop="time"
