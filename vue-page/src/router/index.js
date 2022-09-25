@@ -87,7 +87,7 @@ export default new Router({
         {
           path: "/deviceAudit",
           component: deviceAudit,
-          meta: ["管理员菜单", "设备审核"]
+          meta: ["管理员菜单", "设备操作"]
         }
       ]
     }

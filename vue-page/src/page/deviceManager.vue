@@ -44,8 +44,6 @@
           >
         </template></el-table-column
       >
-      <el-table-column prop="owner" label="设备所有者" width="120">
-      </el-table-column>
       <el-table-column prop="time" label="操作时间" width="220">
       </el-table-column>
       <el-table-column

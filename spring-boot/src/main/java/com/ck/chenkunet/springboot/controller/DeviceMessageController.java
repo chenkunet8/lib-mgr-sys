@@ -24,6 +24,7 @@ public class DeviceMessageController extends BaseController<IDeviceMessageServic
     public Response<List<DeviceMessageInfo>> selectAllDeviceMessageInfo() {
         try {
             List<DeviceMessageInfo> list = service.selectAllDeviceMessageInfo();
+            System.out.println(list);
             return Response.success(list);
         } catch (Exception e) {
             return Response.fail("", null, e.getMessage());
