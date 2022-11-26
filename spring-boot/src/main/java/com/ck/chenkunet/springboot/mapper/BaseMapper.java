@@ -1,5 +1,7 @@
 package com.ck.chenkunet.springboot.mapper;
 
+import com.ck.chenkunet.springboot.entity.User;
+
 import java.util.List;
 
 public interface BaseMapper<T> {
@@ -10,7 +12,7 @@ public interface BaseMapper<T> {
 
     int delete(int id);
 
-    int login(T entity);
+    int login(User entity);
 
     int register(T entity);
 

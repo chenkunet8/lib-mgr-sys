@@ -5,13 +5,11 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserStudent {
+public class UserStudent extends User{
+
     int id;
-    String name;
     String sid;
-    String phone;
     String academy;
-    String pwd;
 
     /**
      * 密码隐藏

@@ -1,5 +1,9 @@
 package com.ck.chenkunet.springboot.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.ck.chenkunet.springboot.auth.service.TokenService;
+import com.ck.chenkunet.springboot.entity.User;
 import com.ck.chenkunet.springboot.pojo.Response;
 import com.ck.chenkunet.springboot.service.IBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,9 @@ public class BaseController<S extends IBaseService<T>, T> {
 
     @Autowired
     S service;
+
+    @Autowired
+    TokenService tokenService;
 
     @ResponseBody
     @GetMapping("/selectAll")
@@ -39,10 +46,13 @@ public class BaseController<S extends IBaseService<T>, T> {
 
     @ResponseBody
     @PostMapping("/login")
-    public Response login(@RequestBody T entity) {
+    public Response login(@RequestBody User entity) {
         try {
-            int id = service.login(entity);
-            return Response.success(id);
+            service.login(entity);
+            String token = tokenService.getToken(entity);
+//            DecodedJWT jwt = tokenService.checkToken(token,"999");
+//            System.out.println(jwt.getClaim("phone").asString());
+            return Response.success(token);
         } catch (Exception e) {
             return Response.fail("", null, e.getMessage());
         }

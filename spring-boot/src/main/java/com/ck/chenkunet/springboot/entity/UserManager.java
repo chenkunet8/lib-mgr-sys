@@ -8,13 +8,10 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-public class UserManager {
+public class UserManager extends User{
 
     int id;
-    String pwd;
-    String name;
     String status;
-    String phone;
 
     /**
      * 密码隐藏

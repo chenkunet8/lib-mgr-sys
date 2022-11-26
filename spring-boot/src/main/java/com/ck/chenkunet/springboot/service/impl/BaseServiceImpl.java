@@ -1,5 +1,6 @@
 package com.ck.chenkunet.springboot.service.impl;
 
+import com.ck.chenkunet.springboot.entity.User;
 import com.ck.chenkunet.springboot.mapper.BaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,7 +19,7 @@ public class BaseServiceImpl<M extends BaseMapper<T>, T> {
         return mapper.selectOne(id);
     }
 
-    public int login(T entity) {
+    public int login(User entity) {
         return mapper.login(entity);
     }
 

@@ -13,4 +13,5 @@ public class UserStudentController extends BaseController<IUserStudentService, U
 
     @Autowired
     IUserStudentService service;
+
 }

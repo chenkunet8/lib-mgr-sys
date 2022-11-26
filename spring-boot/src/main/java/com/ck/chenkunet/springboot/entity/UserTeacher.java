@@ -5,13 +5,11 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserTeacher {
+public class UserTeacher extends User {
+
     int id;
-    String name;
-    String phone;
     String post;
     String academy;
-    String pwd;
     String status;
 
     /**
