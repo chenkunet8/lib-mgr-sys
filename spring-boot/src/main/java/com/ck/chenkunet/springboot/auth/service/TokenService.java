@@ -9,6 +9,6 @@ public interface TokenService {
     String getToken(User user);
 
     //判断token是否可用
-    DecodedJWT checkToken(String token, String phone);
+    DecodedJWT checkToken(String token);
 
 }

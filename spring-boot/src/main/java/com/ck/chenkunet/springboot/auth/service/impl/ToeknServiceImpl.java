@@ -20,7 +20,7 @@ import java.util.Calendar;
 @Component
 public class ToeknServiceImpl implements TokenService {
 
-    @Value("token.secret")
+    @Value("spring.token.secret")
     String SECRET;
 
     @Override
@@ -36,10 +36,10 @@ public class ToeknServiceImpl implements TokenService {
     }
 
     @Override
-    public DecodedJWT checkToken(String token, String phone) {
+    public DecodedJWT checkToken(String token) {
         Algorithm algorithm = Algorithm.HMAC256(SECRET);
         try {
-            JWTVerifier jwtVerifier = JWT.require(algorithm).withClaim("phone", phone).build();
+            JWTVerifier jwtVerifier = JWT.require(algorithm).build();
             return jwtVerifier.verify(token);
         }catch (SignatureVerificationException e) {
             //验证的签名不一致
