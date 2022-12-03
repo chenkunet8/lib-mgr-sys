@@ -6,6 +6,7 @@
         item
       }}</el-breadcrumb-item>
     </el-breadcrumb>
+    <el-tag>在线人数：{{count}}</el-tag>
     <el-dropdown @command="handleCommand" menu-align="start">
       <img src="../../images/head.png" class="avator" />
       <el-dropdown-menu slot="dropdown">
@@ -23,10 +24,28 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      count : 0
+    };
   },
   created() {},
   computed: {},
+  mounted() {
+    let ws = new WebSocket("ws://127.0.0.1:8088/api/websocket/stats");
+    ws.onopen = e => {
+      console.log(e);
+    };
+    ws.onmessage = e => {
+      this.count = e.data
+      console.log(e.data);
+    };
+    ws.onclose = e => {
+      console.log("close");
+    };
+    ws.onerror = e => {
+      console.log("error");
+    };
+  },
   methods: {
     handleCommand(command) {
       command == "homePage" ? this.homePage() : "";

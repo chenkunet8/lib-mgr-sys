@@ -39,7 +39,9 @@
             <template slot="title"
               ><i class="el-icon-setting"></i>操作菜单</template
             >
-            <el-menu-item index="userAudit" v-if="role == 3">教师审核</el-menu-item>
+            <el-menu-item index="userAudit" v-if="role == 3"
+              >教师审核</el-menu-item
+            >
             <el-menu-item index="deviceAudit">设备操作</el-menu-item>
           </el-submenu>
         </el-menu>
@@ -70,6 +72,4 @@ export default {
 
 <style lang="less" scoped>
 @import "../style/mixin";
-.manage_page {
-}
 </style>
